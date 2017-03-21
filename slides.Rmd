@@ -1,0 +1,79 @@
+---
+title: "Topics on Reproducible Research (with R)"
+author: "Davide Risso"
+date: "3/28/2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warnings = FALSE, message = FALSE)
+```
+
+## Outline
+
+- Part I: High-quality reports
+    - What makes a report "high-quality"
+    - Tools
+
+- Part II: Archiving data and code
+    - From exploration to scripts (to functions)
+    - From functions to packages
+    - R packages as data repository
+    - Git and Github
+
+## Useful resources
+
+- Karl Broman's [Tutorial](http://kbroman.org/steps2rr/) and [Slides](http://kbroman.org/pages/talks.html) on "Steps toward reproducible research"
+- Ian Lyttle, Karl Broman, Yihui Xie knitr / rmarkdown [tutorial](https://github.com/ijlyttle/user2016_knitr) at UseR 2016
+- Keith Baggerly's talks on "forensic bioinformatics" [[video](http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html)]
+- [These slides](https://ovsavenkov.github.io/seminars.html)
+
+# Part I: High-quality reports
+
+## What makes a report "high-quality"
+
+1. Correct
+2. Reproducible
+3. Clear
+
+...and?
+
+## ...and?
+
+- Integrates text, figures, and code
+- Allows different levels of readership
+- Automated
+- Versioned
+- Interactive
+- Portable
+
+## Tools
+
+- Reproducibility + automation: __knitr / R markdown__
+- Version control: __git / Github__
+- Interactive + portable: __HTML widgets__
+
+## knitr / R markdown
+
+- Sweave
+- Rnw: R + latex
+- Rmd: R + markdown
+- Advantages of markdown
+- HTML and/or PDF output with (almost) no effort
+- Presentations, websites, books!
+
+## Git / Github
+
+- What is version control?
+- What is git?
+- What is github?
+- Bonus: free private repository with educational account
+- Not only github: gitlab, bitbucket, ...
+- Protected data: set up git locally
+
+## R studio
+
+
+
+# Part II: Archiving data and code
+
