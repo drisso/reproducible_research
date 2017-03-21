@@ -2,11 +2,14 @@
 title: "Topics on Reproducible Research (with R)"
 author: "Davide Risso"
 date: "3/28/2017"
-output: ioslides_presentation
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: false
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warnings = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE, warnings = FALSE, message = FALSE)
 ```
 
 ## Outline
@@ -46,6 +49,7 @@ knitr::opts_chunk$set(echo = FALSE, warnings = FALSE, message = FALSE)
 - Versioned
 - Interactive
 - Portable
+- Pretty
 
 ## Tools
 
@@ -53,14 +57,77 @@ knitr::opts_chunk$set(echo = FALSE, warnings = FALSE, message = FALSE)
 - Version control: __git / Github__
 - Interactive + portable: __HTML widgets__
 
+## Literate programming {.smaller}
+
+From Wikipedia:
+
+Literate programming is a __programming paradigm__ introduced by __Donald Knuth__ in which a program is given as an _explanation of the program logic in a natural language_, such as English, _interspersed with snippets of macros and traditional source code_, from which a compilable source code can be generated.
+
+Was Donald Knuth the original data scientist?
+
+[![IMAGE ALT TEXT](http://i3.ytimg.com/vi/dhh8Ao4yweQ/hqdefault.jpg)](https://www.youtube.com/watch?v=dhh8Ao4yweQ "Donald Knuth")
+
+
 ## knitr / R markdown
 
-- Sweave
-- Rnw: R + latex
-- Rmd: R + markdown
-- Advantages of markdown
-- HTML and/or PDF output with (almost) no effort
+**Sweave**: R + latex
+
+**knitr/rmarkdown**: R + markdown
+
+## What is markdown?
+
+Markdown is a markup language that is much easier to write and read than HTML or latex.
+
+It is inspired by how people (used to) write emails, e.g.,
+
+```
+- One
+- _Two_
+- __Three__
+```
+
+Becomes
+
+- One
+- _Two_
+- __Three__
+
+[Cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+
+
+## Advantages of R Markdown over Sweave
+
+- Output html, pdf, docx
+- Switch between output formats with (almost) no effort
 - Presentations, websites, books!
+
+## How to write code (chunks)
+
+- Show one example
+- Mention figures and results
+- Mention chunk options
+
+## Make it prettier (YAML)
+
+YAML is a human-readable language that can be used (among many things) to personalize the looks of your R markdown report. An example of YAML specifications is the following.
+
+```{yml}
+---
+title: "Topics on Reproducible Research (with R)"
+author: "Davide Risso"
+date: "3/28/2017"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    code_folding: hide
+---
+
+```
+
+## Version Control: Git
+
+![](https://hikaruzone.files.wordpress.com/2015/10/in-case-of-fire-1-git-commit-2-git-push-3-leave-building2.png?w=600)
 
 ## Git / Github
 
@@ -71,9 +138,73 @@ knitr::opts_chunk$set(echo = FALSE, warnings = FALSE, message = FALSE)
 - Not only github: gitlab, bitbucket, ...
 - Protected data: set up git locally
 
-## R studio
+## R Studio
+
+R Studio is an open-source integrated development environment (IDE) for R.
+
+It runs on Windows, Mac, and Linux systems.
+
+It has the big advantage of making it much simpler to work with R markdown and with Git/Github.
 
 
+## HTML widgets
+
+HTML widgets are a great way to add interactivity to your reports.
+
+There are many R packages available online: www.htmlwidgets.org
+
+Here are a couple of examples.
+
+## d3heatmap
+
+```{r heatmap, echo=TRUE}
+library(d3heatmap)
+d3heatmap(mtcars, scale="column", colors="Blues")
+```
+
+## plotly
+
+`plotly` can add interactivity to `ggplot2` graphics.
+
+```{r plotly}
+library(ggplot2)
+library(plotly)
+
+p <- ggplot(data = diamonds, aes(x = cut, fill = clarity)) +
+            geom_bar(position = "dodge") + theme_classic() +
+            scale_fill_brewer(palette = "Set2")
+```
+
+## plotly
+
+```{r plotly_plot}
+ggplotly(p)
+```
+
+## plotly
+
+```{r plotly2}
+library(magrittr)
+set.seed(24242)
+
+diamonds[sample(nrow(diamonds), 500),] %>%
+  ggplot(aes(x = carat, y = price, color = cut, size = carat)) +
+  geom_point() + theme_classic() +
+  scale_color_brewer(palette = "Set1") -> p
+```
+
+## plotly
+
+```{r plotly2_plot}
+ggplotly(p)
+```
+
+## Live demo
+
+1. Create a repository on Github.
+2. Create a project in RStudio linked to the repository.
+3. Create a R Markdown report with an interactive heatmap.
+4. Commit and push the changes to Github.
 
 # Part II: Archiving data and code
 
