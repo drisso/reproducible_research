@@ -19,10 +19,8 @@ knitr::opts_chunk$set(echo = TRUE, warnings = FALSE, message = FALSE)
     - Tools
 
 - Part II: Archiving data and code
-    - From exploration to scripts (to functions)
-    - From functions to packages
+    - From scripts to functions to packages
     - R packages as data repository
-    - Git and Github
 
 ## Useful resources
 
@@ -101,11 +99,105 @@ Becomes
 - Switch between output formats with (almost) no effort
 - Presentations, websites, books!
 
-## How to write code (chunks)
+## How to write Rmarkdown
 
-- Show one example
-- Mention figures and results
-- Mention chunk options
+```{}
+This is some text. _You_ can use **markdown** syntax and latex-stle math: 
+$y = \alpha + \beta x$.
+
+When you want to add a code chunk:
+
+ ```{r}`r ''`
+ alpha <- 1
+ beta <- 2
+ x <- rnorm(10)
+ y <- alpha + beta * x
+ ```
+```
+
+## How it will look
+
+This is some text. _You_ can use **markdown** syntax and latex-stle math: 
+$y = \alpha + \beta x$.
+
+When you want to add a code chunk:
+
+```{r}
+alpha <- 1
+beta <- 2
+x <- rnorm(10)
+y <- alpha + beta * x
+```
+
+## How to write Rmarkdown
+
+```{}
+Output and plots will appear in the document.
+
+ ```{r}`r ''`
+ summary(y)
+ ```
+
+ ```{r}`r ''`
+ plot(y~x)
+ ```
+```
+
+## How it will look
+
+Output and plots will appear in the document.
+
+```{r}
+summary(y)
+```
+
+## How it will look
+
+```{r}
+plot(y~x)
+```
+
+## Chunk options
+
+There are many options that you can set for each individual chunk or globally
+for the whole document.
+
+For instance:
+
+```{}
+
+ ```{r}`r ''`
+ summary(y)
+ ```
+
+ ```{r, echo=FALSE}`r ''`
+ summary(y)
+ ```
+```
+
+## Chunk options
+
+The following chunk is with the default `echo=TRUE`.
+
+```{r}
+summary(y)
+```
+
+The following is the same chunk with `echo=FALSE`.
+
+```{r, echo=FALSE}
+summary(y)
+```
+
+For a complete list of chunk options, see the [knitr manual](https://yihui.name/knitr/options/).
+
+## Setting global options
+
+You can set options globally by using the following command
+
+```{r, eval=FALSE}
+knitr::opts_chunk$set()
+```
 
 ## Make it prettier (YAML)
 
@@ -125,18 +217,52 @@ output:
 
 ```
 
-## Version Control: Git
+## Version control
+
+Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later.
+
+[Source](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)
+
+The main idea is that we want to "save" changes to our files at different time points
+and be able to "travel back in time" to any previous saved versions. 
+
+## Git
+
+Git is a modern version control software that has become very popular.
+
+The main commands (with gross oversimplifications) are:
+
+- `git add`: to add a file to the git tree
+- `git commit`: to commit the changes to the recorded history
+- `git push`: to push the commit(s) to the remote repository
+- `git pull`: to pull the changes from the remote repository
+
+Many more commands exist and there are many resources online to learn git.
+
+## Git
+
+Git is extremely useful for collaborative projects, because it protects you from modifying the same file at the same time as your collaborator.
+
+I use it all the time, even for my own projects because it gives me an easy way
+to **back-up** my code and to **revert** to previous versions in case modifying something breaks everything!
+
+## Github
+
+One reason why Git has become so popular is the availability of free repositories like:
+
+- [Github](https://github.com)
+- [Gitlab](https://gitlab.org)
+- [Bitbucket](https://bitbucket.org)
+
+In addition to free space to back up your projects, they offer tools for collaborative programming (issues, pull requests, ...)
+
+Especially Github has become very popular in the statistical and bioinformatics communities.
+
+Bonus: free private repository with educational account!
+
+## Git can become addictive!
 
 ![](https://hikaruzone.files.wordpress.com/2015/10/in-case-of-fire-1-git-commit-2-git-push-3-leave-building2.png?w=600)
-
-## Git / Github
-
-- What is version control?
-- What is git?
-- What is github?
-- Bonus: free private repository with educational account
-- Not only github: gitlab, bitbucket, ...
-- Protected data: set up git locally
 
 ## R Studio
 
@@ -208,3 +334,44 @@ ggplotly(p)
 
 # Part II: Archiving data and code
 
+## From scripts to functions to packages
+
+Most of this is adapted from Karl Broman [Tutorial](http://kbroman.org/steps2rr/).
+
+All aspects of data analysis should be in a script!
+
+It is all to common to "try" some code interactively, save the results, and forget what has been done to get to those results.
+
+## From scripts to functions to packages
+
+Scripts often contain long stretches of repeated code (copy-and-paste).
+
+It's better to break up the code into functions: modular and reusable.
+
+Once you have a collection of functions, it is not too hard to package them
+in a R package.
+
+## R packages
+
+The (free!) book by Hadley Wickham [R packages](http://r-pkgs.had.co.nz)
+makes it extremely easy to get started with writing your package.
+
+R Studio also has some extremely helpful resources.
+
+## R packages and version control
+
+Use Github to manage your package version.
+
+Pro tips:
+
+- Test your code with the [testthat package](https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf)
+- [Continuous Integration (CI)](https://travis-ci.org) to run the tests after every commit and immediately realize when they are broken.
+
+## R packages as data repositories
+
+R packages are not only for code, but can be used also to archive and share data.
+
+Examples: 
+
+- [Bioconductor experiment data](https://www.bioconductor.org/packages/release/BiocViews.html#___ExperimentData)
+- [Yeast RNA-seq data](https://github.com/drisso/yeastRNASeqRisso2011)
