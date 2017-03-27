@@ -447,6 +447,14 @@ Open science helps reproducible research: more people looking at your code, more
 
 Whenever possible, share code + data.
 
+## R Session Info {.smaller}
+
+Always finish your reports with info on the R version and package versions that you used.
+
+```{r}
+sessionInfo()
+```
+
 ## Final remarks
 
 ![](https://hikaruzone.files.wordpress.com/2015/10/in-case-of-fire-1-git-commit-2-git-push-3-leave-building2.png?w=600)
