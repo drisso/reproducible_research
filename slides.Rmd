@@ -28,6 +28,9 @@ knitr::opts_chunk$set(echo = TRUE, warnings = FALSE, message = FALSE)
 - Ian Lyttle, Karl Broman, Yihui Xie knitr / rmarkdown [tutorial](https://github.com/ijlyttle/user2016_knitr) at UseR 2016
 - Keith Baggerly's talks on "forensic bioinformatics" [[video](http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html)]
 - [These slides](https://ovsavenkov.github.io/seminars.html)
+* [Hadley Wickham's website](http://hadley.nz)
+* [Yihui Xie's github](https://github.com/yihui)
+
 
 # Part I: High-quality reports
 
@@ -47,7 +50,7 @@ knitr::opts_chunk$set(echo = TRUE, warnings = FALSE, message = FALSE)
 - Versioned
 - Interactive
 - Portable
-- Pretty
+- Beautiful
 
 ## Tools
 
@@ -68,9 +71,13 @@ Was Donald Knuth the original data scientist?
 
 ## knitr / R markdown
 
+`knitr` and `R markdown` are R packages that can be used to combine text, code, and output (including figures) into a single document.
+
 **Sweave**: R + latex
 
-**knitr/rmarkdown**: R + markdown
+**knitr/rmarkdown**: R + (latex | markdown)
+
+**IPython / Jupyter notebook**: python
 
 ## What is markdown?
 
@@ -98,6 +105,8 @@ Becomes
 - Output html, pdf, docx
 - Switch between output formats with (almost) no effort
 - Presentations, websites, books!
+
+As an example, [this presentation](https://github.com/drisso/reproducible_research/blob/master/slides.Rmd) was written in R markdown.
 
 ## How to write Rmarkdown
 
@@ -217,14 +226,38 @@ output:
 
 ```
 
+## R Studio
+
+R Studio is an open-source integrated development environment (IDE) for R.
+
+It runs on Windows, Mac, and Linux systems.
+
+It has the big advantage of making it much simpler to work with R markdown and with Git/Github.
+
+Live demo: 
+
+1. Create an R markdown report in RStudio.
+2. Add YAML specifications.
+
+## So far...
+
+We have a report that is **reproducible**, **portable**, and **automated**.
+
+If we change the data or we optimize the code, we can easily regenerate the report.
+
+**How do we keep track of the changes?**
+
+
 ## Version control
 
 Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later.
 
-[Source](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)
+[Link to know more](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)
 
-The main idea is that we want to "save" changes to our files at different time points
-and be able to "travel back in time" to any previous saved versions. 
+The main idea is that we want to **save changes** to our files at different time points
+and be able to **"travel back in time"** to any previous saved versions. 
+
+Available software: subversion, svn, git.
 
 ## Git
 
@@ -238,6 +271,8 @@ The main commands (with gross oversimplifications) are:
 - `git pull`: to pull the changes from the remote repository
 
 Many more commands exist and there are many resources online to learn git.
+
+[A good place to start](http://kbroman.org/github_tutorial/)
 
 ## Git
 
@@ -260,24 +295,22 @@ Especially Github has become very popular in the statistical and bioinformatics 
 
 Bonus: free private repository with educational account!
 
-## Git can become addictive!
+## R Studio + Github
 
-![](https://hikaruzone.files.wordpress.com/2015/10/in-case-of-fire-1-git-commit-2-git-push-3-leave-building2.png?w=600)
+Again, for those who are not too confortable with the command line, R Studio can be used to interact with git/Github.
 
-## R Studio
+Live demo: 
 
-R Studio is an open-source integrated development environment (IDE) for R.
-
-It runs on Windows, Mac, and Linux systems.
-
-It has the big advantage of making it much simpler to work with R markdown and with Git/Github.
-
+1. Create a repository on Github.
+2. Create a project in RStudio linked to the repository.
+3. Create a R Markdown report.
+4. Commit and push the changes to Github.
 
 ## HTML widgets
 
 HTML widgets are a great way to add interactivity to your reports.
 
-There are many R packages available online: www.htmlwidgets.org
+There are many R packages available [online](www.htmlwidgets.org).
 
 Here are a couple of examples.
 
@@ -327,14 +360,12 @@ ggplotly(p)
 
 ## Live demo
 
-1. Create a repository on Github.
-2. Create a project in RStudio linked to the repository.
-3. Create a R Markdown report with an interactive heatmap.
-4. Commit and push the changes to Github.
+1. Add an interactive plot to the report.
+2. Commit and push the changes to the repository.
 
 # Part II: Archiving data and code
 
-## From scripts to functions to packages
+## From code to scripts
 
 Most of this is adapted from Karl Broman [Tutorial](http://kbroman.org/steps2rr/).
 
@@ -342,28 +373,58 @@ All aspects of data analysis should be in a script!
 
 It is all to common to "try" some code interactively, save the results, and forget what has been done to get to those results.
 
-## From scripts to functions to packages
+## From scripts to functions
 
 Scripts often contain long stretches of repeated code (copy-and-paste).
 
 It's better to break up the code into functions: modular and reusable.
 
+## From functions to packages
+
 Once you have a collection of functions, it is not too hard to package them
 in a R package.
 
-## R packages
+Advantages of R packages:
+
+- No need to retrieve the script where you have all your utility functions.
+- Just install it once, and then simply load it in all your scripts.
+- It forces you to write documentation for your functions.
+
+## R package resources
 
 The (free!) book by Hadley Wickham [R packages](http://r-pkgs.had.co.nz)
 makes it extremely easy to get started with writing your package.
 
-R Studio also has some extremely helpful resources.
+The [r-project website](http://www.r-project.org) has very extensive [manuals](https://cran.r-project.org/manuals.html).
 
-## R packages and version control
+## R package structure
 
-Use Github to manage your package version.
+An R package is a collection of files, organized in a structured directory.
+
+A typical R package, contains the following files and directories.
+
+* R/
+* data/
+* man/
+* tests/
+* vignettes/
+* DESCRIPTION
+* NAMESPACE
+
+Some of these can be missing.
+
+## Live demo
+
+Again, R Studio is your friend!
+
+1. Given two numeric vectors, plot a mean-difference plot.
+2. Create a function that automates this process.
+3. Create an R package to store the function.
+4. (Bonus) Create a Github repository for the package.
 
 Pro tips:
 
+- Use [roxygen](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html) to automatically generate documentation files.
 - Test your code with the [testthat package](https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf)
 - [Continuous Integration (CI)](https://travis-ci.org) to run the tests after every commit and immediately realize when they are broken.
 
@@ -375,3 +436,17 @@ Examples:
 
 - [Bioconductor experiment data](https://www.bioconductor.org/packages/release/BiocViews.html#___ExperimentData)
 - [Yeast RNA-seq data](https://github.com/drisso/yeastRNASeqRisso2011)
+
+# Final remarks
+
+## Reproducible research and open science
+
+These best practices for reproducible research make it easier to engage in open science.
+
+Open science helps reproducible research: more people looking at your code, more likely to find bugs.
+
+Whenever possible, share code + data.
+
+## Final remarks
+
+![](https://hikaruzone.files.wordpress.com/2015/10/in-case-of-fire-1-git-commit-2-git-push-3-leave-building2.png?w=600)
